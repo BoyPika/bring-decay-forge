@@ -3,3 +3,6 @@
 /build/
 /build/sourcesSets/main/
 /out/
+/run/
+/run-data/
+/.idea/

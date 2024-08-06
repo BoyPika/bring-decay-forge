@@ -1,5 +1,6 @@
 package net.boypika.bringdecay.util;
 
+import net.boypika.bringdecay.Config;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
@@ -14,13 +15,17 @@ import static net.boypika.bringdecay.BringDecay.LOGGER;
 public class BrewingRecipe {
     @SubscribeEvent
     public static void registerBrewingRecipes(BrewingRecipeRegisterEvent event) {
-        PotionBrewing.Builder builder = event.getBuilder();
+        if (Config.brewableDecayPotion) {
+            PotionBrewing.Builder builder = event.getBuilder();
 
-        builder.addMix(
-                Potions.AWKWARD,
-                Items.WITHER_ROSE,
-                DECAY.getHolder().get()
-        );
-        LOGGER.info("Brewing Recipe Added");
+            builder.addMix(
+                    Potions.AWKWARD,
+                    Items.WITHER_ROSE,
+                    DECAY.getHolder().get()
+            );
+            LOGGER.info("Brewing Recipe Added");
+        } else {
+            LOGGER.info("Brewing Recipe Not Added (Check Config)");
+        }
     }
 }
